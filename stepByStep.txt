@@ -1,0 +1,27 @@
+brew install minikube
+# Initialization cluster
+minikube start
+
+# Get ndoes
+kubectl get nodes
+
+# Check Status
+minikube status
+
+# Run application
+kubectl run hello-minikube --image=k82.gcr.io/echoserver:1.4 --port=8080
+
+# Expose the deploy
+kubectl expose deployment hello-minikube --type=NodePort
+
+# Query dependency
+
+minikube service hello-minikube
+
+# Get IP
+
+minikube ip
+
+# init dashboard
+minikube dashboard
+
