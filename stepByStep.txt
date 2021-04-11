@@ -25,3 +25,24 @@ minikube ip
 # init dashboard
 minikube dashboard
 
+kubctl describe node [node_name]
+
+ # Check node list details
+get nodes -o wide
+
+#Use kubeadm //Working with the play with kubernetes page
+
+1) kubeadm init --apiserver-advertise-address $(hostname -i) --pod-network-cidr 10.5.0.0/161)
+
+# For subscribe to master node and connect
+2) kubeadm join 192.168.0.13:6443 --token iddcq5.i3z26ud1h4mkx2xi \ --discovery-token-ca-cert-hash sha256:90ac7c14d17da17712fc8ab04d392aa64e57cb949d7135f0ccc36fd09bd6204a
+
+# Initialization cluster networking
+
+3) kubeadm join 192.168.0.13:6443 --token iddcq5.i3z26ud1h4mkx2xi \
+    --discovery-token-ca-cert-hash sha256:90ac7c14d17da17712fc8ab04d392aa64e57cb949d7135f0ccc36fd09bd6204a
+
+# Deploy nginx server
+
+4) (Obtional) kubectl apply -f https://raw.githubusercontent.com/kubernetes/website/master/content/en/examples/application/nginx-app.yaml
+
