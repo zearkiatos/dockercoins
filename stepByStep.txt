@@ -46,3 +46,13 @@ get nodes -o wide
 
 4) (Obtional) kubectl apply -f https://raw.githubusercontent.com/kubernetes/website/master/content/en/examples/application/nginx-app.yaml
 
+5) Install aws iam authenticator
+
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+
+brew install aws-iam-authenticator
+
+aws-iam-authenticator help
+
+6) Access to ASW Cluster from console
+aws eks --region [region] update-kubeconfig --name [cluster_name]
