@@ -44,5 +44,36 @@ get nodes -o wide
 
 # Deploy nginx server
 
+# https://docs.aws.amazon.com/eks/latest/userguide/install-kubectl.html
+
 4) (Obtional) kubectl apply -f https://raw.githubusercontent.com/kubernetes/website/master/content/en/examples/application/nginx-app.yaml
 
+5) Install aws iam authenticator
+
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+
+brew install aws-iam-authenticator
+
+aws-iam-authenticator help
+
+6) Access to ASW Cluster from console
+aws eks --region [region] update-kubeconfig --name [cluster_name]
+
+7) If you receive Unauthorized or access denied message
+
+aws --region <region-code> eks update-kubeconfig --name <cluster_name> --role-arn arn:aws:iam::<aws_account_id>:role/<role_name>
+
+aws --region us-east-2 eks update-kubeconfig --name dockercoins-cluster --role-arn arn:aws:iam::039694763644:role/EKSClusterRole
+
+8) Use Kubectl commands
+
+kubectl get nodes
+kubectl get svc
+
+9) Create workers node in amazon cloudformation
+
+10) Add node template https://amazon-eks.s3-us-west-2.amazonaws.com/cloudformation/2019-02-11/amazon-eks-nodegroup.yaml
+
+11) Edition cluster authorization to join to cluster with node instanrole
+
+https://docs.aws.amazon.com/eks/latest/userguide/add-user-role.html
