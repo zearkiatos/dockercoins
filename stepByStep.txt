@@ -77,3 +77,27 @@ kubectl get svc
 11) Edition cluster authorization to join to cluster with node instanrole
 
 https://docs.aws.amazon.com/eks/latest/userguide/add-user-role.html
+
+12) Deploy test application
+
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/examples/master/guestbook-go/redis-master-controller.json
+
+**Create service**
+
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/examples/master/guestbook-go/redis-master-service.json
+
+**Slave controller**
+
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/examples/master/guestbook-go/redis-slave-controller.json
+
+**Slave service**
+
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/examples/master/guestbook-go/redis-slave-service.json
+
+**Deploy guestbook controller**
+
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/examples/master/guestbook-go/guestbook-controller.json
+
+**Deploy guestbook service**
+
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/examples/master/guestbook-go/guestbook-service.json
