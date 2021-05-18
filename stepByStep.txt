@@ -1,0 +1,103 @@
+brew install minikube
+# Initialization cluster
+minikube start
+
+# Get ndoes
+kubectl get nodes
+
+# Check Status
+minikube status
+
+# Run application
+kubectl run hello-minikube --image=k82.gcr.io/echoserver:1.4 --port=8080
+
+# Expose the deploy
+kubectl expose deployment hello-minikube --type=NodePort
+
+# Query dependency
+
+minikube service hello-minikube
+
+# Get IP
+
+minikube ip
+
+# init dashboard
+minikube dashboard
+
+kubctl describe node [node_name]
+
+ # Check node list details
+get nodes -o wide
+
+#Use kubeadm //Working with the play with kubernetes page
+
+1) kubeadm init --apiserver-advertise-address $(hostname -i) --pod-network-cidr 10.5.0.0/161)
+
+# For subscribe to master node and connect
+2) kubeadm join 192.168.0.13:6443 --token iddcq5.i3z26ud1h4mkx2xi \ --discovery-token-ca-cert-hash sha256:90ac7c14d17da17712fc8ab04d392aa64e57cb949d7135f0ccc36fd09bd6204a
+
+# Initialization cluster networking
+
+3) kubeadm join 192.168.0.13:6443 --token iddcq5.i3z26ud1h4mkx2xi \
+    --discovery-token-ca-cert-hash sha256:90ac7c14d17da17712fc8ab04d392aa64e57cb949d7135f0ccc36fd09bd6204a
+
+# Deploy nginx server
+
+# https://docs.aws.amazon.com/eks/latest/userguide/install-kubectl.html
+
+4) (Obtional) kubectl apply -f https://raw.githubusercontent.com/kubernetes/website/master/content/en/examples/application/nginx-app.yaml
+
+5) Install aws iam authenticator
+
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+
+brew install aws-iam-authenticator
+
+aws-iam-authenticator help
+
+6) Access to ASW Cluster from console
+aws eks --region [region] update-kubeconfig --name [cluster_name]
+
+7) If you receive Unauthorized or access denied message
+
+aws --region <region-code> eks update-kubeconfig --name <cluster_name> --role-arn arn:aws:iam::<aws_account_id>:role/<role_name>
+
+aws --region us-east-2 eks update-kubeconfig --name dockercoins-cluster --role-arn arn:aws:iam::039694763644:role/EKSClusterRole
+
+8) Use Kubectl commands
+
+kubectl get nodes
+kubectl get svc
+
+9) Create workers node in amazon cloudformation
+
+10) Add node template https://amazon-eks.s3-us-west-2.amazonaws.com/cloudformation/2019-02-11/amazon-eks-nodegroup.yaml
+
+11) Edition cluster authorization to join to cluster with node instanrole
+
+https://docs.aws.amazon.com/eks/latest/userguide/add-user-role.html
+
+12) Deploy test application
+
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/examples/master/guestbook-go/redis-master-controller.json
+
+**Create service**
+
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/examples/master/guestbook-go/redis-master-service.json
+
+**Slave controller**
+
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/examples/master/guestbook-go/redis-slave-controller.json
+
+**Slave service**
+
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/examples/master/guestbook-go/redis-slave-service.json
+
+**Deploy guestbook controller**
+
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/examples/master/guestbook-go/guestbook-controller.json
+
+**Deploy guestbook service**
+
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/examples/master/guestbook-go/guestbook-service.json
